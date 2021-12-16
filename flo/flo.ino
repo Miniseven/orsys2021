@@ -15,7 +15,7 @@ DHT_Unified dht(DHTPIN, DHTTYPE);
   
 void setup() {
   pinMode(2, INPUT);
-  attachInterrupt(INT1,menuChange,RISING);
+  attachInterrupt(INT1s,menuChange,RISING);
   bmp.begin();
   lcd.begin();
   lcd.backlight();
