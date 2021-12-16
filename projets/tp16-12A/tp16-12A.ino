@@ -11,10 +11,7 @@
 
 #define DHTPIN 4
 #define DHTTYPE    DHT11     // DHT 11
-#define ONE_WIRE_BUS 5
 
-OneWire oneWire(ONE_WIRE_BUS);
-DallasTemperature sensors(&oneWire);
 
 Adafruit_MPU6050 mpu;
 Adafruit_BMP085 bmp;
@@ -22,7 +19,6 @@ DHT_Unified dht(DHTPIN, DHTTYPE);
 float initialPressure = 0;
 
 void setup() {
-  Serial.begin(9600);
   if (!bmp.begin()) {
     Serial.println("Could not find a valid BMP085 sensor, check wiring!");
     while (1) {}
@@ -37,7 +33,6 @@ void setup() {
     }
   }
   dht.begin();
-  sensors.begin();
 
 }
 
@@ -53,17 +48,6 @@ void loop() {
   float bmpTemp = bmp.readTemperature();
   float bmpPaPress = bmp.readPressure();
   float alt = bmp.readAltitude(initialPressure);
-
-  sensors.requestTemperatures();
-  float tempC = sensors.getTempCByIndex(0);
-  if(tempC != DEVICE_DISCONNECTED_C) 
-  {
-    Serial.print("Temperature for the dallas temperature (index 0) is: ");
-    Serial.println(tempC);
-  } 
-  else
-  {
-    Serial.println("Error: Could not read temperature data");}
 
   Serial.print(F("DHT Temperature: "));
   Serial.print(dhtevent.temperature);
