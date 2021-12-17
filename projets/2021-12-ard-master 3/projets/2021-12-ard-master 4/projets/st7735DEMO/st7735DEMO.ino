@@ -1,12 +1,15 @@
 #include "struct.h"
+#include "st7735.h"
 void setup() {
   // put your setup code here, to run once:
   initDatas();
+  initST();
 }
 
 void loop() {
   // put your main code here, to run repeatedly:
-
+  loopST(s);
+  delay(500);
 }
 void initDatas(){
   s.meteo.pressure=101000;
