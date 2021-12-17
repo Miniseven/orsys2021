@@ -2,6 +2,7 @@
 Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
 void showTime(char*);
 void showPressure(char*);
+void showtemp(char*);
 void initFrame();
 void initST() {
   tft.initR(INITR_BLACKTAB);      // Init ST7735S chip, black tab
@@ -13,6 +14,10 @@ void loopST(S_Datas datas) {
   char buff[15]="";
   sprintf(buff,"%02d:%02d",datas.tm.Hour,datas.tm.Minute);
   showTime(buff);
+  sprintf(buff,"%6d Pa",datas.meteo.pressure);
+  showPressure(buff);
+  sprintf(buff," C",datas.meteo.temp);
+  showtemp(buff);
 }
 void initFrame(){
 
@@ -27,8 +32,16 @@ void showTime(char* str)
 
 void showPressure(char* str)
 {
-  tft.fillRect(POS_PRESS_X-10,POS_PRESS_Y-2,44,12, ST77XX_BLUE);
+  tft.fillRect(POS_PRESS_X-44,POS_PRESS_Y-2,50,12, ST77XX_BLACK);
   tft.setCursor(POS_PRESS_X,POS_PRESS_Y);
   tft.setTextColor(ST77XX_WHITE);
+  tft.print(str);
+}
+
+void showtemp(char* str)
+{
+  tft.fillRect(POS_TEMP_X-50,POS_TEMP_Y-2,100,12, ST77XX_BLACK);
+  tft.setCursor(POS_TEMP_X,POS_TEMP_Y);
+  tft.setTextColor(ST77XX_RED);
   tft.print(str);
 }

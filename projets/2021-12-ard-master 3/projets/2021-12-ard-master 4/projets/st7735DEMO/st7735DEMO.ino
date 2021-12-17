@@ -9,7 +9,7 @@ void setup() {
 void loop() {
   // put your main code here, to run repeatedly:
   loopST(s);
-  delay(500);
+  delay(900);
 }
 void initDatas(){
   s.meteo.pressure=101000;
